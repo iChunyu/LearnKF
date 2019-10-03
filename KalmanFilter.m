@@ -11,25 +11,27 @@ set(0,'DefaultFigureColor','w')
 clear;clc
 close all
 
-%%
+%% Set parameters
 Ts = 1e-3;
 
 omg0 = 2*pi/1.5;
 ksi = 0.5;
 m = 1;
 
+% CT state space
 Ac = [0 1; -omg0^2 -ksi];
 Bc = [ 0 1/m]';
 Cc = [ 1 0];
-IniC = [ 1 0];
+IniS = [ 1 0];      % Initial state
 
 Q = 1e-3;
 R = 1e-3;
 
+% DT state space
 Ad = Ac*Ts+eye(2);
 Bd = Bc*Ts;
 Cd = Cc;
-PredC = [0.8 0];
+PredS = [0.8 0];    % Predicted initial state
 
 %%
 sim('KalmanFilterSim')
